@@ -11,7 +11,7 @@ void VortexDebrisModel::updateSim() {
 }
 
 
-DebrisFlightParams VortexDebrisModel::runSimulation(){
+std::tuple<DebrisParams, DebrisFlightParams> VortexDebrisModel::runSimulation(){
 
     while (debrisPos.z >= 0 && simTime < MAX_FLIGHT_TIME) {
         updateSim();
@@ -25,7 +25,7 @@ DebrisFlightParams VortexDebrisModel::runSimulation(){
         debrisFlightParams.valid = true;
     }
 
-    return debrisFlightParams;
+    return { debrisParams, debrisFlightParams };
 }
 
 

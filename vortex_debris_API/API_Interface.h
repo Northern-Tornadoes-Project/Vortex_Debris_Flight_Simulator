@@ -3,6 +3,7 @@
 #include <omp.h>
 #include <vector>
 #include <array>
+#include <tuple>
 #include <string>
 #include <algorithm>
 #include <memory>
@@ -25,6 +26,6 @@
 #endif
 
 	void unpackRandParams(double params[], RandomParameterGenerator& randParamGen);
-	double* packDebrisFlightParams(DebrisFlightParams& dfp);
+	double* packResults(DebrisParams& dp, DebrisFlightParams& dfp);
 
 

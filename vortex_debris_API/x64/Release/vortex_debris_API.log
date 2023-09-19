@@ -1,28 +1,24 @@
 ﻿  API_Interface.cpp
-D:\vortex_debris_model\vortex_debris_API\BakerSterlingDebrisModel.h(2,1): warning C4005: 'NOMINMAX': macro redefinition
-D:\vortex_debris_model\vortex_debris_API\BakerSterlingDebrisModel.h(2,1): message : 'NOMINMAX' previously declared on the command line
-D:\vortex_debris_model\vortex_debris_API\RandomParameterGenerator.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\vortex_debris_model\vortex_debris_API\RandomParameterGenerator.h(33,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\vortex_debris_model\vortex_debris_API\RandomParameterGenerator.h(45,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\vortex_debris_model\vortex_debris_API\API_Interface.cpp(20,10): warning C4273: 'matchTrajMonteCarlo': inconsistent dll linkage
-D:\vortex_debris_model\vortex_debris_API\API_Interface.h(20,30): message : see previous definition of 'matchTrajMonteCarlo'
-D:\vortex_debris_model\vortex_debris_API\API_Interface.cpp(26,22): warning C4244: 'argument': conversion from 'const double' to 'const unsigned __int64', possible loss of data
-D:\vortex_debris_model\vortex_debris_API\API_Interface.cpp(37,23): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
-D:\vortex_debris_model\vortex_debris_API\API_Interface.cpp(75,44): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
-D:\vortex_debris_model\vortex_debris_API\API_Interface.cpp(75,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
-D:\vortex_debris_model\vortex_debris_API\API_Interface.cpp(84,29): warning C4244: 'argument': conversion from 'const double' to 'const unsigned __int64', possible loss of data
-D:\vortex_debris_model\vortex_debris_API\API_Interface.cpp(93,10): warning C4273: 'getTraj': inconsistent dll linkage
-D:\vortex_debris_model\vortex_debris_API\API_Interface.h(21,30): message : see previous definition of 'getTraj'
-  BakerSterlingDebrisModel.cpp
-D:\vortex_debris_model\vortex_debris_API\BakerSterlingDebrisModel.h(2,1): warning C4005: 'NOMINMAX': macro redefinition
-D:\vortex_debris_model\vortex_debris_API\BakerSterlingDebrisModel.h(2,1): message : 'NOMINMAX' previously declared on the command line
-  VortexDebrisModel.cpp
-     Creating library D:\vortex_debris_model\vortex_debris_API\x64\Release\vortex_debris_API.lib and object D:\vortex_debris_model\vortex_debris_API\x64\Release\vortex_debris_API.exp
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\BakerSterlingDebrisModel.h(2,1): warning C4005: 'NOMINMAX': macro redefinition
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\BakerSterlingDebrisModel.h(2,1): message : 'NOMINMAX' previously declared on the command line
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\RandomParameterGenerator.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\RandomParameterGenerator.h(6,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\RandomParameterGenerator.h(38,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.cpp(18,10): warning C4273: 'matchTrajMonteCarlo': inconsistent dll linkage
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.h(21,30): message : see previous definition of 'matchTrajMonteCarlo'
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.cpp(24,22): warning C4244: 'argument': conversion from 'const double' to 'const unsigned __int64', possible loss of data
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.cpp(35,23): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.cpp(70,44): warning C4244: 'argument': conversion from 'const double' to 'int', possible loss of data
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.cpp(70,40): warning C4267: 'argument': conversion from 'size_t' to 'int', possible loss of data
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.cpp(79,29): warning C4244: 'argument': conversion from 'const double' to 'const unsigned __int64', possible loss of data
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.cpp(88,10): warning C4273: 'getTraj': inconsistent dll linkage
+D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\API_Interface.h(22,30): message : see previous definition of 'getTraj'
+     Creating library D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Release\vortex_debris_API.lib and object D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Release\vortex_debris_API.exp
   Generating code
-  13 of 297 functions ( 4.4%) were compiled, the rest were copied from previous compilation.
+  3 of 309 functions ( 1.0%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     0 functions had inline decision re-evaluated but remain unchanged
   Finished generating code
-  vortex_debris_API.vcxproj -> D:\vortex_debris_model\vortex_debris_API\x64\Release\vortex_debris_API.dll
+  vortex_debris_API.vcxproj -> D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Release\vortex_debris_API.dll
   x64\Release\vortex_debris_API.dll
   1 File(s) copied

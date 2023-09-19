@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include <tuple>
 
 #include "Vec3.h"
 #include "DebrisParams.h"
@@ -59,7 +60,7 @@ public:
 		simTime = 0.0;
 	}
 
-	DebrisFlightParams runSimulation();
+	std::tuple<DebrisParams, DebrisFlightParams> runSimulation();
 	Trajectory simulateTrajectory();
 	void updateSim();
 	void updateDebris();

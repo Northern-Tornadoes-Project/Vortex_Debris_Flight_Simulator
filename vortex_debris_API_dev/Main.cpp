@@ -23,14 +23,14 @@ void exportToCSV(string filename, vector<double*>& data, double* p) {
 
 	ofstream csvFile(filename + ".csv");
 
-	csvFile << "Valid Trajectories, width, trajectory min, trajectory max, l, rho_m\n";
+	csvFile << "Valid Trajectories, width, trajectory min, trajectory max\n";
 
-	csvFile << std::format("{},{},{},{},{},{}\n", p[0], p[1], p[2], p[3], p[4], p[5]);
+	csvFile << std::format("{},{},{},{}\n", p[0], p[1], p[2], p[3]);
 
-	csvFile << "Loft Speed, rm, vt, vr, delta, s, cd_sm, cd_air, cl\n";
+	csvFile << "Loft Speed, l, rho_m, rm, vt, vr, delta, s, cd_sm, cd_air, cl\n";
 
 	for (auto& d : data) {
-		csvFile << std::format("{},{},{},{},{},{},{},{},{}\n", d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8]);
+		csvFile << std::format("{},{},{},{},{},{},{},{},{},{},{}\n", d[0], d[1], d[2], d[3], d[4], d[5], d[6], d[7], d[8], d[9], d[10]);
 	}
 
 	csvFile.close();
@@ -38,16 +38,16 @@ void exportToCSV(string filename, vector<double*>& data, double* p) {
 
 int main() { 
 
-	double p[30] = 
+	double p[34] = 
 	{ 
 		NUM_OF_VALID_TRAJECTORIES,		// NUM_OF_VALID_TRAJECTORIES
 		1600.0,							// width
 		50.0,							// traj min
 		100.0,							// traj max
-		1.22,							// l, Characteristic Length of Debris
-		180.0,							// rho_m Density of Debris
-
 										// Randomly generated parameters {min or mean, max, sd} if sd < 0, uses uniform distribution instead
+
+		1.22, 1.22, -1.0,				// l, Characteristic Length of Debris
+		170.0, 190.0, -1.0,				// rho_m Density of Debris						
 		160.0, 320.0, -1.0,				// rm, Core Radiusm
 		15.0, 19.0, -1.0,				// vt, Translational Speed
 		50.0, 180.0, -1.0,				// vr, Max Radial Speed
@@ -106,7 +106,7 @@ int main() {
 	matplot::title("CDF Plot");
 	matplot::show();
 
-	//plot median trajectory
+	//plot median trajectory (needs to be updated)
 	/*double* medianResult = results[(int)(NUM_OF_VALID_TRAJECTORIES / 2.0)];
 	double medianP[11] = { 640.0, 3.35, 72.0, medianResult[1], medianResult[2], medianResult[3], medianResult[4], medianResult[5], medianResult[6], medianResult[7], medianResult[8] };
 

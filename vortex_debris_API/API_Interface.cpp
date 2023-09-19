@@ -8,8 +8,6 @@ using namespace std;
 //i = current index of loop
 //total = total iterations of loop
 void updateProgressBar(int i, int total) {
-    //assumes index starts at 1
-    ++i;
     int barLength = 50;
     float progress = (float)i / (float)total;
     int pos = (int)(progress * (float)barLength);
@@ -22,7 +20,7 @@ double** matchTrajMonteCarlo(double params[]){
 	const double NUM_OF_VALID_TRAJECTORIES = params[0];
 
 	//list of valid sets of parameters
-	vector<DebrisFlightParams> validParams;
+	vector<tuple<DebrisParams, DebrisFlightParams>> validParams;
 	validParams.reserve(NUM_OF_VALID_TRAJECTORIES);
 
 	RandomParameterGenerator randParamGen = RandomParameterGenerator();
@@ -46,28 +44,25 @@ double** matchTrajMonteCarlo(double params[]){
 			dfp.traj_min = params[2];
 			dfp.traj_max = params[3];
 
+			DebrisParams dp = DebrisParams();
+
 			//only one parallel thread can enter a critcal section at a time
 			//this is to prevent synchronization problems where two threads
 			//overwrite the same resource at the same time.
 			#pragma omp critical
 			{
 				totalSims++;
-				randParamGen.generate(dfp);
+				randParamGen.generate(dp, dfp);
 			}
-
-			DebrisParams dp = DebrisParams();
-			dp.l = params[4];
-			dp.rho_m = params[5];
-			dp.z_correction = dfp.rm * dfp.delta;
 
 			//create simulation model using parameters
 			BakerSterlingDebrisModel model = BakerSterlingDebrisModel(dp, dfp);
 
 			//run simulation
-			DebrisFlightParams result = model.runSimulation();
+			auto result = model.runSimulation();
 
 			//add valid trajectories to list
-			if (result.valid) {
+			if (get<1>(result).valid) {
 
 				#pragma omp critical
 				{
@@ -84,7 +79,7 @@ double** matchTrajMonteCarlo(double params[]){
 	packedValidParams->reserve(NUM_OF_VALID_TRAJECTORIES);
 
 	for (auto& p : validParams) {
-		packedValidParams->push_back(packDebrisFlightParams(p));
+		packedValidParams->push_back(packResults(get<0>(p), get<1>(p)));
 	}
 
 	return (double**)&packedValidParams->at(0);
@@ -118,16 +113,18 @@ double** getTraj(double params[]){
 }
 
 void unpackRandParams(double params[], RandomParameterGenerator& randParamGen) {
-	randParamGen.rm = { params[6], params[7], params[8] }; // {min or mean, max, sd} if sd < 0, uses uniform distribution instead
-	randParamGen.vt = { params[9], params[10], params[11] };
-	randParamGen.vr = { params[12], params[13], params[14] };
-	randParamGen.delta = { params[15], params[16], params[17] };
-	randParamGen.s = { params[18], params[19], params[20] };
-	randParamGen.cd_sm = { params[21], params[22], params[23] };
-	randParamGen.cd_air = { params[24], params[25], params[26] };
-	randParamGen.cl = { params[27], params[28], params[29] };
+	randParamGen.l = { params[4], params[5], params[6] };
+	randParamGen.rho_m = { params[7], params[8], params[9] };
+	randParamGen.rm = { params[10], params[11], params[12] }; // {min or mean, max, sd} if sd < 0, uses uniform distribution instead
+	randParamGen.vt = { params[13], params[14], params[15] };
+	randParamGen.vr = { params[16], params[17], params[18] };
+	randParamGen.delta = { params[19], params[20], params[21] };
+	randParamGen.s = { params[22], params[23], params[24] };
+	randParamGen.cd_sm = { params[25], params[26], params[27] };
+	randParamGen.cd_air = { params[28], params[29], params[30] };
+	randParamGen.cl = { params[31], params[32], params[33] };
 }
 
-double* packDebrisFlightParams(DebrisFlightParams& dfp) {
-	return new double[9] { dfp.loftSpeed, dfp.rm, dfp.vt, dfp.vr, dfp.delta, dfp.s, dfp.cd_sm, dfp.cd_air, dfp.cl};
+double* packResults(DebrisParams& dp, DebrisFlightParams& dfp) {
+	return new double[11] { dfp.loftSpeed, dp.l, dp.rho_m, dfp.rm, dfp.vt, dfp.vr, dfp.delta, dfp.s, dfp.cd_sm, dfp.cd_air, dfp.cl};
 }

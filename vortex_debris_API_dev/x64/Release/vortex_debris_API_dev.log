@@ -1,10 +1,1 @@
-﻿  Main.cpp
-D:\vortex_debris_model\vortex_debris_API\RandomParameterGenerator.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
-D:\vortex_debris_model\vortex_debris_API\RandomParameterGenerator.h(33,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-D:\vortex_debris_model\vortex_debris_API\RandomParameterGenerator.h(45,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
-  Generating code
-  5 of 1003 functions ( 0.5%) were compiled, the rest were copied from previous compilation.
-    0 functions were new in current compilation
-    3 functions had inline decision re-evaluated but remain unchanged
-  Finished generating code
-  vortex_debris_API_dev.vcxproj -> D:\vortex_debris_model\vortex_debris_API_dev\x64\Release\vortex_debris_API_dev.exe
+﻿  vortex_debris_API_dev.vcxproj -> D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API_dev\x64\Release\vortex_debris_API_dev.exe
