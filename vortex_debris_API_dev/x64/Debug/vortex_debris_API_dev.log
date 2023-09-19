@@ -1,0 +1,6 @@
+﻿  Main.cpp
+F:\vortex_debris_model\vortex_debris_API_dev\RandomParameterGenerator.h(5,10): warning C4067: unexpected tokens following preprocessor directive - expected a newline
+F:\vortex_debris_model\vortex_debris_API_dev\RandomParameterGenerator.h(31,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\vortex_debris_model\vortex_debris_API_dev\RandomParameterGenerator.h(43,22): warning C4244: 'argument': conversion from 'time_t' to 'unsigned int', possible loss of data
+F:\vortex_debris_model\vortex_debris_API_dev\Main.cpp(60,62): warning C4244: 'argument': conversion from 'double' to 'const unsigned __int64', possible loss of data
+  vortex_debris_API_dev.vcxproj -> F:\vortex_debris_model\vortex_debris_API_dev\x64\Debug\vortex_debris_API_dev.exe
