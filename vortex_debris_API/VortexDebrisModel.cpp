@@ -20,7 +20,7 @@ std::tuple<DebrisParams, DebrisFlightParams> VortexDebrisModel::runSimulation(){
     double trajDist = hypot(debrisPos.x - startX, debrisPos.y);
 
     //valid trajectory?
-    if (debrisState == inAir && debrisFlightParams.traj_min < trajDist && trajDist < debrisFlightParams.traj_max) {
+    if ((debrisState == inAir || (debrisState == transitioning && debrisFlightParams.traj_min <= 0.0)) && debrisFlightParams.traj_min < trajDist && trajDist < debrisFlightParams.traj_max) {
         
         debrisFlightParams.valid = true;
     }
