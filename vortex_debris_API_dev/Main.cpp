@@ -42,20 +42,20 @@ int main() {
 	{ 
 		NUM_OF_VALID_TRAJECTORIES,		// NUM_OF_VALID_TRAJECTORIES
 		1600.0,							// width
-		50.0,							// traj min
+		1.0,							// traj min
 		100.0,							// traj max
 										// Randomly generated parameters {min or mean, max, sd} if sd < 0, uses uniform distribution instead
 
 		1.22, 1.22, -1.0,				// l, Characteristic Length of Debris
-		170.0, 190.0, -1.0,				// rho_m Density of Debris						
+		145.0, 190.0, -1.0,				// rho_m Density of Debris						
 		160.0, 320.0, -1.0,				// rm, Core Radiusm
 		15.0, 19.0, -1.0,				// vt, Translational Speed
-		50.0, 180.0, -1.0,				// vr, Max Radial Speed
+		30.0, 140.0, -1.0,				// vr, Max Radial Speed
 		0.1, 0.2, -1.0,					// delta, Terrain Roughness
 		0.7, 1.3, -1.0,					// s, Swirl Ratio
-		0.6, 0.9, -1.0,					// cd_sm, Drag Coeffcient
-		0.35, 0.65, -1.0,				// cd_air, Drag Coeffcient
-		0.3, 0.5, -1.0					// cl, Drag Coeffcient
+		0.71, 0.83, -1.0,				// cd_sm, Drag Coeffcient
+		1.2, 1.5, -1.0,					// cd_air, Drag Coeffcient
+		0.34, 0.46, -1.0				// cl, Drag Coeffcient
 	};
 	auto r = matchTrajMonteCarlo(p);
 
@@ -128,7 +128,6 @@ int main() {
 	matplot::show();*/
 
 	//plot histogram of loft speeds
-	
 	/*vector<double> loftSpeeds;
 
 	for(auto& p : results){
