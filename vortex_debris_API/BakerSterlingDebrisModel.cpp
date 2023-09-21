@@ -17,14 +17,18 @@ Vec3 BakerSterlingDebrisModel::computeAcceleration()
     //compute vortex field velocities
     auto [U, V, W] = computeFieldVel(r/rm, (debrisPos.z + debrisParams.z_correction)/zm);
 
+    //compute polar vortex translation velocity
+    const double vt_u = x * debrisFlightParams.vt / r;
+    const double vt_v = -y * debrisFlightParams.vt / r;
+
     //compute polar debris velocity relative to vortex center
     //cos(theta) = x/r, sin(theta) = y/r, computing a divison is faster than trig functions
     const double u = (x * debrisVel.x + y * debrisVel.y) / r;
     const double v = (x * debrisVel.y - y * debrisVel.x) / r;
 
     //compute polar acceleration of debris
-    double A = U - u;
-    double B = V - v;
+    double A = (U + vt_u) - u;
+    double B = (V + vt_v) - v;
     double Y = W - debrisVel.z;
     const double R2 = A * A + B * B + Y * Y;
     const double R = sqrt(R2);
@@ -50,7 +54,7 @@ Vec3 BakerSterlingDebrisModel::computeAcceleration()
 
             //lift off
             if (dwdt > 0.0) {
-                debrisFlightParams.loftSpeed = sqrt(U * U + V * V + W * W);
+                debrisFlightParams.loftSpeed = sqrt((U + vt_u) * (U + vt_u) + (V + vt_v) * (V + vt_v) + W * W);
             }
             break;
 
