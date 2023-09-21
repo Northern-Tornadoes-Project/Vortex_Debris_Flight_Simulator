@@ -62,7 +62,9 @@ public:
 
 	std::tuple<DebrisParams, DebrisFlightParams> runSimulation();
 	Trajectory simulateTrajectory();
+	Trajectory simulateTrajectoryRK4();
 	void updateSim();
+	void updateSimRK4();
 	void updateDebris();
 	void updateVortex();
 	virtual Vec3 computeAcceleration() = 0;

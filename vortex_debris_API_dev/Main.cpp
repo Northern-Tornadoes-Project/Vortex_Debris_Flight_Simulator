@@ -57,7 +57,7 @@ int main() {
 	{ 
 		NUM_OF_VALID_TRAJECTORIES,		// NUM_OF_VALID_TRAJECTORIES
 		1600.0,							// width
-		1.0,							// traj min set <= 0 for loft threshold speed
+		0.0,							// traj min set <= 0 for loft threshold speed
 		100.0,							// traj max
 										// Randomly generated parameters {min or mean, max, sd} if sd < 0, uses uniform distribution instead
 
@@ -88,8 +88,8 @@ int main() {
 	cout << "Max Vel: " << results[NUM_OF_VALID_TRAJECTORIES - 1][0] << "m/s\n\n";
 	cout << "Median Vel: " << results[(int)(NUM_OF_VALID_TRAJECTORIES / 2.0)][0] << "m/s\n\n";
 
-	////export to csv
-	//exportParamsToCSV("haybail_graident_test", results, p);
+	//export to csv
+	//exportParamsToCSV("haybail_parameters", results, p);
 
 
 	////plot cdf
@@ -126,8 +126,10 @@ int main() {
 	double medianP[11] = { 640.0, medianResult[1], medianResult[2], medianResult[3], medianResult[4], medianResult[5], medianResult[6], medianResult[7], medianResult[8], medianResult[9], medianResult[10] };
 
 	auto traj = getTraj(medianP);
+	auto trajRK4 = getTrajRK4(medianP);
 
 	array<vector<double>, 3> split_traj;
+	array<vector<double>, 3> split_traj_RK4;
 
 	int i = 0;
 	while (!isnan(traj[i][0])) {
@@ -136,9 +138,18 @@ int main() {
 		split_traj[2].push_back(traj[i][2]);
 		i++;
 	}
-	auto l = matplot::plot3(split_traj[0], split_traj[1], split_traj[2]);
+	//auto l = matplot::plot3(split_traj[0], split_traj[1], split_traj[2]);
 
-	exportTrajToCSV("haybail_trajectory", split_traj);
+	i = 0;
+	while (!isnan(trajRK4[i][0])) {
+		split_traj_RK4[0].push_back(trajRK4[i][0]);
+		split_traj_RK4[1].push_back(trajRK4[i][1]);
+		split_traj_RK4[2].push_back(trajRK4[i][2]);
+		i++;
+	}
+	auto l = matplot::plot3(split_traj[0], split_traj[1], split_traj[2], split_traj_RK4[0], split_traj_RK4[1], split_traj_RK4[2]);
+
+	//exportTrajToCSV("haybail_trajectory", split_traj);
 
 	matplot::xlabel("x");
 	matplot::ylabel("y");
