@@ -112,6 +112,33 @@ double** getTraj(double params[]){
 	return traj.exportTraj();
 }
 
+double** getTrajRK4(double params[]) {
+	DebrisFlightParams dfp = DebrisFlightParams();
+	dfp.width = params[0];
+
+	dfp.rm = params[3];
+	dfp.vt = params[4];
+	dfp.vr = params[5];
+	dfp.delta = params[6];
+	dfp.s = params[7];
+	dfp.cd_sm = params[8];
+	dfp.cd_air = params[9];
+	dfp.cl = params[10];
+
+	DebrisParams dp = DebrisParams();
+	dp.l = params[1];
+	dp.rho_m = params[2];
+	dp.z_correction = dfp.rm * dfp.delta;
+
+	BakerSterlingDebrisModel model = BakerSterlingDebrisModel(dp, dfp);
+
+	Trajectory traj = model.simulateTrajectoryRK4();
+	auto v = Vec3(nan("0"), nan("0"), nan("0"));
+	traj.add(v);
+
+	return traj.exportTraj();
+}
+
 void unpackRandParams(double params[], RandomParameterGenerator& randParamGen) {
 	randParamGen.l = { params[4], params[5], params[6] };
 	randParamGen.rho_m = { params[7], params[8], params[9] };

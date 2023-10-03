@@ -57,7 +57,7 @@ int main() {
 	{ 
 		NUM_OF_VALID_TRAJECTORIES,		// NUM_OF_VALID_TRAJECTORIES
 		1600.0,							// width
-		1.0,							// traj min set <= 0 for loft threshold speed
+		50.0,							// traj min set <= 0 for loft threshold speed
 		100.0,							// traj max
 										// Randomly generated parameters {min or mean, max, sd} if sd < 0, uses uniform distribution instead
 
@@ -65,9 +65,9 @@ int main() {
 		145.0, 190.0, -1.0,				// rho_m Density of Debris						
 		160.0, 320.0, -1.0,				// rm, Core Radiusm
 		15.0, 19.0, -1.0,				// vt, Translational Speed
-		30.0, 140.0, -1.0,				// vr, Max Radial Speed
+		50.0, 140.0, -1.0,				// vr, Max Radial Speed
 		0.1, 0.2, -1.0,					// delta, Terrain Roughness
-		0.7, 1.3, -1.0,					// s, Swirl Ratio
+		0.3, 1.1, -1.0,					// s, Swirl Ratio
 		0.71, 0.83, -1.0,				// cd_sm, Drag Coeffcient
 		1.2, 1.5, -1.0,					// cd_air, Drag Coeffcient
 		0.34, 0.46, -1.0				// cl, Drag Coeffcient
@@ -88,17 +88,17 @@ int main() {
 	cout << "Max Vel: " << results[NUM_OF_VALID_TRAJECTORIES - 1][0] << "m/s\n\n";
 	cout << "Median Vel: " << results[(int)(NUM_OF_VALID_TRAJECTORIES / 2.0)][0] << "m/s\n\n";
 
-	////export to csv
-	//exportParamsToCSV("haybail_graident_test", results, p);
+	//export to csv
+	exportParamsToCSV("haybail_parameters_gust", results, p);
 
 
-	////plot cdf
-	//array<vector<double>, 2> cdfDist;
+	//plot cdf
+	array<vector<double>, 2> cdfDist;
 
-	//for (int i = 0; i < NUM_OF_VALID_TRAJECTORIES; i++) {
-	//	cdfDist[0].push_back(results[i][0]);
-	//	cdfDist[1].push_back((double)(i+1) / (double)NUM_OF_VALID_TRAJECTORIES);
-	//}
+	for (int i = 0; i < NUM_OF_VALID_TRAJECTORIES; i++) {
+		cdfDist[0].push_back(results[i][0]);
+		cdfDist[1].push_back((double)(i+1) / (double)NUM_OF_VALID_TRAJECTORIES);
+	}
 
 	////smooth cdf using mean filter
 	///*int filter_size = 9;
@@ -114,36 +114,47 @@ int main() {
 	//	cdfDist[0][i] = sum / count;
 	//}*/
 
-	//auto cdfPlot = matplot::plot(cdfDist[0], cdfDist[1]);
-	//matplot::yrange({ -0.05, 1.05 });
-	//matplot::xlabel("Loft Speed (m/s)");
-	//matplot::ylabel("Percentage %");
-	//matplot::title("CDF Plot");
-	//matplot::show();
+	auto cdfPlot = matplot::plot(cdfDist[0], cdfDist[1]);
+	matplot::yrange({ -0.05, 1.05 });
+	matplot::xlabel("Loft Speed (m/s)");
+	matplot::ylabel("Percentage %");
+	matplot::title("CDF Plot");
+	matplot::show();
 
 	//plot median trajectory (needs to be updated)
-	double* medianResult = results[(int)(NUM_OF_VALID_TRAJECTORIES / 2.0)];
-	double medianP[11] = { 640.0, medianResult[1], medianResult[2], medianResult[3], medianResult[4], medianResult[5], medianResult[6], medianResult[7], medianResult[8], medianResult[9], medianResult[10] };
+	//double* medianResult = results[(int)(NUM_OF_VALID_TRAJECTORIES / 2.0)];
+	//double medianP[11] = { 640.0, medianResult[1], medianResult[2], medianResult[3], medianResult[4], medianResult[5], medianResult[6], medianResult[7], medianResult[8], medianResult[9], medianResult[10] };
 
-	auto traj = getTraj(medianP);
+	//auto traj = getTraj(medianP);
+	//auto trajRK4 = getTrajRK4(medianP);
 
-	array<vector<double>, 3> split_traj;
+	//array<vector<double>, 3> split_traj;
+	//array<vector<double>, 3> split_traj_RK4;
 
-	int i = 0;
-	while (!isnan(traj[i][0])) {
-		split_traj[0].push_back(traj[i][0]);
-		split_traj[1].push_back(traj[i][1]);
-		split_traj[2].push_back(traj[i][2]);
-		i++;
-	}
-	auto l = matplot::plot3(split_traj[0], split_traj[1], split_traj[2]);
+	//int i = 0;
+	//while (!isnan(traj[i][0])) {
+	//	split_traj[0].push_back(traj[i][0]);
+	//	split_traj[1].push_back(traj[i][1]);
+	//	split_traj[2].push_back(traj[i][2]);
+	//	i++;
+	//}
+	////auto l = matplot::plot3(split_traj[0], split_traj[1], split_traj[2]);
 
-	exportTrajToCSV("haybail_trajectory", split_traj);
+	//i = 0;
+	//while (!isnan(trajRK4[i][0])) {
+	//	split_traj_RK4[0].push_back(trajRK4[i][0]);
+	//	split_traj_RK4[1].push_back(trajRK4[i][1]);
+	//	split_traj_RK4[2].push_back(trajRK4[i][2]);
+	//	i++;
+	//}
+	//auto l = matplot::plot3(split_traj[0], split_traj[1], split_traj[2], split_traj_RK4[0], split_traj_RK4[1], split_traj_RK4[2]);
 
-	matplot::xlabel("x");
-	matplot::ylabel("y");
-	matplot::zlabel("z");
-	matplot::show();
+	////exportTrajToCSV("haybail_trajectory", split_traj);
+
+	//matplot::xlabel("x");
+	//matplot::ylabel("y");
+	//matplot::zlabel("z");
+	//matplot::show();
 
 	//plot histogram of loft speeds
 	/*vector<double> loftSpeeds;

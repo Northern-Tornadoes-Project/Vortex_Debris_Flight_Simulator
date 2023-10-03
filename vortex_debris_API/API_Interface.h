@@ -20,6 +20,7 @@
 
 		double VORTEX_DEBRIS_API **matchTrajMonteCarlo(double params[]);
 		double VORTEX_DEBRIS_API **getTraj(double params[]);
+		double VORTEX_DEBRIS_API** getTrajRK4(double params[]);
 
 #ifdef __cplusplus
 }

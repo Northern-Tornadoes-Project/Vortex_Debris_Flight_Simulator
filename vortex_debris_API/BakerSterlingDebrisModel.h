@@ -26,5 +26,8 @@ public:
 
 	Vec3 computeAcceleration();
 	std::array<const double, 3> computeFieldVel(const double r, const double z);
+	double computeGustSpeed(const double x, const double y, double gustTime);
+	double computeFieldMag(double x, double y);
+	double lazy_Integrate(double(BakerSterlingDebrisModel::* f)(double x, double y), const double x0, const double x1, const double y0, const double y1, const int N);
 };
 

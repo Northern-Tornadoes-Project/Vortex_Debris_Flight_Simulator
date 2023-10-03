@@ -142,6 +142,7 @@
       <AdditionalOptions>-DNOMINMAX %(AdditionalOptions)</AdditionalOptions>
       <EnableEnhancedInstructionSet>NotSet</EnableEnhancedInstructionSet>
       <FloatingPointModel>Precise</FloatingPointModel>
+      <AdditionalIncludeDirectories>D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\libIntegrate;D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\libIntegrate\_1D;D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\libIntegrate\_2D;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -160,6 +161,7 @@
     <ClInclude Include="DebrisFlightParams.h" />
     <ClInclude Include="DebrisParams.h" />
     <ClInclude Include="framework.h" />
+    <ClInclude Include="libIntegrate\Integrate.hpp" />
     <ClInclude Include="pch.h" />
     <ClInclude Include="RandomParameterGenerator.h" />
     <ClInclude Include="Trajectory.h" />

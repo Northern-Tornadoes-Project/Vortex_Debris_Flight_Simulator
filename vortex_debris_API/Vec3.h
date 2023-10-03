@@ -43,6 +43,13 @@ public:
 		return *this;
 	}
 
+	Vec3 const& operator=(const Vec3& v) {
+		x = v.x;
+		y = v.y;
+		z = v.z;
+		return *this;
+	}
+
 	double const& operator[](const int i) const
 	{
 		switch (i) {
