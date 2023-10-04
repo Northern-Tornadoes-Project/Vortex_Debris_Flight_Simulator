@@ -3,7 +3,7 @@ D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\BakerSte
 D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\BakerSterlingDebrisModel.h(2,1): message : 'NOMINMAX' previously declared on the command line
      Creating library D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Release\vortex_debris_API.lib and object D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Release\vortex_debris_API.exp
   Generating code
-  5 of 317 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
+  3 of 415 functions ( 0.7%) were compiled, the rest were copied from previous compilation.
     0 functions were new in current compilation
     1 functions had inline decision re-evaluated but remain unchanged
   Finished generating code

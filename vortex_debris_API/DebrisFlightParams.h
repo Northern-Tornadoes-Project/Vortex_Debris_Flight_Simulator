@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include "Vec3.h"
 
 //class for storing and handling the debris flight parameter initialization
 class DebrisFlightParams{
@@ -21,6 +22,7 @@ public:
 	double traj_max;
 
 	double loftSpeed = 0.0;
+	Vec3 loftPos;
 	bool valid = false;
 	
 	DebrisFlightParams() {

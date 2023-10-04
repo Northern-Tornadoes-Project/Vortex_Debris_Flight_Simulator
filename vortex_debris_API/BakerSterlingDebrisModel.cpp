@@ -55,7 +55,8 @@ Vec3 BakerSterlingDebrisModel::computeAcceleration()
 
             //lift off
             if (dwdt > 0.0) {
-                debrisFlightParams.loftSpeed = computeGustSpeed(x, y, 3.0);
+                debrisFlightParams.loftPos = Vec3(x, y, 0.0);
+                //debrisFlightParams.loftSpeed = computeGustSpeed(x, y, 3.0);
 
             }
             break;
@@ -115,7 +116,7 @@ double BakerSterlingDebrisModel::computeFieldMag(double x, double y) {
 
 double BakerSterlingDebrisModel::lazy_Integrate(double(BakerSterlingDebrisModel::* f)(double x, double y), const double x0, const double x1, const double y0, const double y1, const int N) {
 
-    //compute Riemann sum
+    //compute 2d Riemann sum
 
     double sum = 0.0;
     double sum_in = 0.0;
@@ -123,13 +124,77 @@ double BakerSterlingDebrisModel::lazy_Integrate(double(BakerSterlingDebrisModel:
     const double xs = (x1 - x0) / (double)N;
     const double ys = (y1 - y0) / (double)N;
 
-    for (double y = y0; y <= y1; y += ys) {
-        for (double x = x0; x <= x1; x += xs) {
+    for (double y = y0; y < y1; y += ys) {
+        for (double x = x0; x < x1; x += xs) {
             sum_in += (this->*f)(x, y) * xs;
         }
         sum += sum_in * ys;
         sum_in = 0.0;
     }
+    return sum;
+}
+
+double BakerSterlingDebrisModel::simpson_Integrate(double(BakerSterlingDebrisModel::* f)(double x, double y), const double x0, const double x1, const double y0, const double y1, const int N) {
+
+    //compute 2d Simpson's rule integral
+    const double xs = (x1 - x0) / (double)N;
+    const double ys = (y1 - y0) / (double)N;
+
+    std::vector<std::vector<double>> m;
+    m.reserve(N+1);
+
+    //compute simpson sample matrix
+    for (int i = 0; i <= N; i++) {
+        m.push_back(std::vector<double>());
+        m[i].reserve(N + 1);
+
+        for (int j = 0; j <= N; j++) {
+            m[i].push_back((this->*f)(x0 + j*xs, y0 + i*ys));
+        }
+    }
+
+    //sum rows (x) using simpsons rule
+    for (int i = 0; i <= N; i++) {
+        double sum_in = m[i][0] + m[i][N];
+
+        //odd
+        double sum_odd = 0.0;
+        for (int j = 1; j < N; j += 2) {
+            sum_odd += m[i][j];
+        }
+
+        //even
+        double sum_even = 0.0;
+        for (int j = 2; j < N; j += 2) {
+            sum_even += m[i][j];
+        }
+
+        sum_in += 4.0 * sum_odd + 2.0 * sum_even;
+
+        sum_in *= (xs / 3.0);
+
+        m[i][0] = sum_in;
+    }
+
+    //sum summed column using simpsons rule
+    double sum = m[0][0] + m[N][0];
+
+    //odd
+    double sum_odd = 0.0;
+    for (int i = 1; i < N; i += 2) {
+        sum_odd += m[i][0];
+    }
+
+    //even
+    double sum_even = 0.0;
+    for (int i = 2; i < N; i += 2) {
+        sum_even += m[i][0];
+    }
+
+    sum += 4.0 * sum_odd + 2.0 * sum_even;
+
+    sum *= (ys / 3.0);
+
     return sum;
 }
 
@@ -142,7 +207,7 @@ double BakerSterlingDebrisModel::computeGustSpeed(const double x, const double y
     const double y1 = y + sf;
     const double y0 = y - sf;
 
-    double I = lazy_Integrate(&BakerSterlingDebrisModel::computeFieldMag, x0, x1, y0, y1, 100);
+    double I = simpson_Integrate(&BakerSterlingDebrisModel::computeFieldMag, x0, x1, y0, y1, 100);
 
     const double A = gustTime * gustTime * debrisFlightParams.vt * debrisFlightParams.vt;
 

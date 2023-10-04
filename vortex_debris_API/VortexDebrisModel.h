@@ -68,5 +68,6 @@ public:
 	void updateDebris();
 	void updateVortex();
 	virtual Vec3 computeAcceleration() = 0;
+	virtual double computeGustSpeed(const double x, const double y, double gustTime) = 0;
 };
 

@@ -73,6 +73,7 @@ std::tuple<DebrisParams, DebrisFlightParams> VortexDebrisModel::runSimulation(){
     if ((debrisState == inAir || (debrisState == transitioning && debrisFlightParams.traj_min <= 0.0)) && debrisFlightParams.traj_min < trajDist && trajDist < debrisFlightParams.traj_max) {
         
         debrisFlightParams.valid = true;
+        debrisFlightParams.loftSpeed = computeGustSpeed(debrisFlightParams.loftPos.x, debrisFlightParams.loftPos.y, 3.0);
     }
 
     return { debrisParams, debrisFlightParams };
