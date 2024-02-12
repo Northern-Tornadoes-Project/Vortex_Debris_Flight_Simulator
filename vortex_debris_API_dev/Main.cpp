@@ -7,7 +7,7 @@
 #include <API_Interface.h>
 
 
-#define NUM_OF_VALID_TRAJECTORIES 1000
+#define NUM_OF_VALID_TRAJECTORIES 10000
 
 using namespace std;
 

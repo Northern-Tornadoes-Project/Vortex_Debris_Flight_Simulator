@@ -71,6 +71,10 @@ std::tuple<DebrisParams, DebrisFlightParams> VortexDebrisModel::runSimulation(){
     while (simTime < MAX_FLIGHT_TIME) {
         updateSimRK4();
 
+        if (debrisState == onGround && simTime > 0.1 * MAX_FLIGHT_TIME) {
+            break;
+        }
+
         if (debrisState == transitioning && debrisPos.z < 0.0) {
             break;
         }
