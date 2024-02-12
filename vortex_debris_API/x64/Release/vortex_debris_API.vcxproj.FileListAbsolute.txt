@@ -1,3 +1,4 @@
 F:\vortex_debris_model\vortex_debris_API\x64\Release\vortex_debris_API.dll
 D:\vortex_debris_model\vortex_debris_API\x64\Release\vortex_debris_API.dll
 D:\vortex_debris_model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Release\vortex_debris_API.dll
+X:\Vortex Debris Model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Release\vortex_debris_API.dll

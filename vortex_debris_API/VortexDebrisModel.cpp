@@ -56,6 +56,9 @@ void VortexDebrisModel::updateSimRK4() {
             break;
     }
 
+    if (heightState == notReached && debrisPos.z >= debrisFlightParams.req_height) {
+        heightState = reached;
+    }
 
     simTime += dt;
 }
@@ -63,14 +66,25 @@ void VortexDebrisModel::updateSimRK4() {
 
 std::tuple<DebrisParams, DebrisFlightParams> VortexDebrisModel::runSimulation(){
 
-    while (debrisPos.z >= 0 && simTime < MAX_FLIGHT_TIME) {
+    bool validFlight = false;
+
+    while (simTime < MAX_FLIGHT_TIME) {
         updateSimRK4();
+
+        if (debrisState == transitioning && debrisPos.z < 0.0) {
+            break;
+        }
+
+        if (heightState == reached && debrisPos.z < debrisFlightParams.end_height) {
+            validFlight = true;
+            break;
+        }
     }
 
     double trajDist = hypot(debrisPos.x - startX, debrisPos.y);
 
     //valid trajectory?
-    if ((debrisState == inAir || (debrisState == transitioning && debrisFlightParams.traj_min <= 0.0)) && debrisFlightParams.traj_min < trajDist && trajDist < debrisFlightParams.traj_max) {
+    if ((validFlight || (debrisState == transitioning && debrisFlightParams.traj_min <= 0.0)) && debrisFlightParams.traj_min < trajDist && trajDist < debrisFlightParams.traj_max) {
         
         debrisFlightParams.valid = true;
         debrisFlightParams.loftSpeed = computeGustSpeed(debrisFlightParams.loftPos.x, debrisFlightParams.loftPos.y, 3.0);
@@ -83,9 +97,13 @@ std::tuple<DebrisParams, DebrisFlightParams> VortexDebrisModel::runSimulation(){
 Trajectory VortexDebrisModel::simulateTrajectory() {
     Trajectory traj = Trajectory();
 
-    while (debrisPos.z >= 0 && simTime < MAX_FLIGHT_TIME) {
+    while (simTime < MAX_FLIGHT_TIME) {
         traj.add(debrisPos);
         updateSim();
+
+        if (heightState == reached && debrisPos.z < debrisFlightParams.end_height) {
+            break;
+        }
     }
 
     traj.add(debrisPos);
@@ -96,9 +114,13 @@ Trajectory VortexDebrisModel::simulateTrajectory() {
 Trajectory VortexDebrisModel::simulateTrajectoryRK4() {
     Trajectory traj = Trajectory();
 
-    while (debrisPos.z >= 0 && simTime < MAX_FLIGHT_TIME) {
+    while (simTime < MAX_FLIGHT_TIME) {
         traj.add(debrisPos);
         updateSimRK4();
+
+        if (heightState == reached && debrisPos.z < debrisFlightParams.end_height) {
+            break;
+        }
     }
 
     traj.add(debrisPos);

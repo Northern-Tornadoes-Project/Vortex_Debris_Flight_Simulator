@@ -16,7 +16,6 @@ void updateProgressBar(int i, int total) {
 }
 
 double** matchTrajMonteCarlo(double params[]){
-
 	const double NUM_OF_VALID_TRAJECTORIES = params[0];
 
 	//list of valid sets of parameters
@@ -35,7 +34,7 @@ double** matchTrajMonteCarlo(double params[]){
 	updateProgressBar(0, NUM_OF_VALID_TRAJECTORIES);
 
 	//tell compiler this section should be run in parallel
-	#pragma omp parallel
+	#pragma omp parallel firstprivate(params)
 	{
 		while (validParams.size() <= NUM_OF_VALID_TRAJECTORIES) {
 
@@ -43,6 +42,8 @@ double** matchTrajMonteCarlo(double params[]){
 			dfp.width = params[1];
 			dfp.traj_min = params[2];
 			dfp.traj_max = params[3];
+			dfp.req_height = params[34];
+			dfp.end_height = params[35];
 
 			DebrisParams dp = DebrisParams();
 

@@ -1,0 +1,9 @@
+﻿  VortexDebrisModel.cpp
+X:\Vortex Debris Model\Vortex_Debris_Flight_Simulator\vortex_debris_API\Vec3.h(36): warning C4172: returning address of local variable or temporary
+X:\Vortex Debris Model\Vortex_Debris_Flight_Simulator\vortex_debris_API\Vec3.h(21): warning C4172: returning address of local variable or temporary
+     Creating library X:\Vortex Debris Model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Debug\vortex_debris_API.lib and object X:\Vortex Debris Model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Debug\vortex_debris_API.exp
+  vortex_debris_API.vcxproj -> X:\Vortex Debris Model\Vortex_Debris_Flight_Simulator\vortex_debris_API\x64\Debug\vortex_debris_API.dll
+  0 File(s) copied
+  File not found - vortex_debris_API.dll
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(159,5): error MSB3073: The command "xcopy /y /d "x64\Release\vortex_debris_API.dll" "..\vortex_debris_API_dev\x64\Release\"
+C:\Program Files\Microsoft Visual Studio\2022\Community\MSBuild\Microsoft\VC\v170\Microsoft.CppCommon.targets(159,5): error MSB3073: :VCEnd" exited with code 4.

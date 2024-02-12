@@ -26,13 +26,19 @@ protected:
 	DebrisParams debrisParams;
 	DebrisFlightParams debrisFlightParams;
 
-	enum FlightState {
+	enum DebrisState {
 		onGround = 0,
 		transitioning = 1,
 		inAir = 2,
 	};
 
-	FlightState debrisState;
+	enum HeightState {
+		notReached = 0,
+		reached = 1,
+	};
+
+	DebrisState debrisState;
+	HeightState heightState;
 
 
 public:
@@ -48,6 +54,7 @@ public:
 		k = debrisFlightParams.rho / (2 * debrisParams.rho_m * debrisParams.l);
 
 		debrisState = onGround;
+		heightState = notReached;
 
 		debrisVel = Vec3();
 

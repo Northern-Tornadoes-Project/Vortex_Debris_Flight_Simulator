@@ -7,7 +7,7 @@
 #include <API_Interface.h>
 
 
-#define NUM_OF_VALID_TRAJECTORIES 10000
+#define NUM_OF_VALID_TRAJECTORIES 1000
 
 using namespace std;
 
@@ -53,24 +53,26 @@ void exportTrajToCSV(string filename, array<vector<double>, 3>& split_traj) {
 
 int main() { 
 
-	double p[34] = 
+	double p[36] = 
 	{ 
 		NUM_OF_VALID_TRAJECTORIES,		// NUM_OF_VALID_TRAJECTORIES
-		1600.0,							// width
-		50.0,							// traj min set <= 0 for loft threshold speed
+		640.0,							// width
+		80.0,							// traj min set <= 0 for loft threshold speed
 		100.0,							// traj max
 										// Randomly generated parameters {min or mean, max, sd} if sd < 0, uses uniform distribution instead
 
-		1.22, 1.22, -1.0,				// l, Characteristic Length of Debris
-		145.0, 190.0, -1.0,				// rho_m Density of Debris						
-		160.0, 320.0, -1.0,				// rm, Core Radiusm
-		15.0, 19.0, -1.0,				// vt, Translational Speed
+		3.35, 3.35, -1.0,				// l, Characteristic Length of Debris
+		72.0, 72.0, -1.0,				// rho_m Density of Debris						
+		64.0, 576.0, -1.0,				// rm, Core Radiusm
+		6.0, 10.0, -1.0,				// vt, Translational Speed
 		50.0, 140.0, -1.0,				// vr, Max Radial Speed
 		0.1, 0.2, -1.0,					// delta, Terrain Roughness
-		0.3, 1.1, -1.0,					// s, Swirl Ratio
-		0.71, 0.83, -1.0,				// cd_sm, Drag Coeffcient
-		1.2, 1.5, -1.0,					// cd_air, Drag Coeffcient
-		0.34, 0.46, -1.0				// cl, Drag Coeffcient
+		0.4, 1.1, -1.0,					// s, Swirl Ratio
+		1.4, 1.8, -1.0,					// cd_sm, Drag Coeffcient
+		1.8, 2.0, -1.0,					// cd_air, Drag Coeffcient
+		0.30, 0.5, -1.0,				// cl, Drag Coeffcient
+		1.0,							// requied height the debris must reach
+		-2.0							// end height relative to initial height of 0
 	};
 	auto r = matchTrajMonteCarlo(p);
 

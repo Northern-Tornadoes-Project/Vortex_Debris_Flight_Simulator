@@ -74,13 +74,13 @@
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LibraryPath>$(LibraryPath);D:\vortex_debris_model\Matplot++ 1.2.0\lib;D:\vortex_debris_model\Matplot++ 1.2.0\lib\Matplot++</LibraryPath>
-    <IncludePath>D:\vortex_debris_model\Matplot++ 1.2.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(LibraryPath);..\Matplot++ 1.2.0\lib;..\Matplot++ 1.2.0\lib\Matplot++</LibraryPath>
+    <IncludePath>..\Matplot++ 1.2.0\include;$(IncludePath)</IncludePath>
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <IncludePath>D:\vortex_debris_model\Matplot++ 1.2.0\include;$(IncludePath)</IncludePath>
-    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);D:\vortex_debris_model\Matplot++ 1.2.0\lib;D:\vortex_debris_model\Matplot++ 1.2.0\lib\Matplot++</LibraryPath>
+    <IncludePath>..\Matplot++ 1.2.0\include;$(IncludePath)</IncludePath>
+    <LibraryPath>$(VC_LibraryPath_x64);$(WindowsSDK_LibraryPath_x64);..\Matplot++ 1.2.0\lib;..\Matplot++ 1.2.0\lib\Matplot++</LibraryPath>
     <ExternalIncludePath>$(ExternalIncludePath)</ExternalIncludePath>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">

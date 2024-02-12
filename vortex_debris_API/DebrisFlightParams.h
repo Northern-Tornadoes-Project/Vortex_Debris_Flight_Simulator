@@ -20,6 +20,8 @@ public:
 	double cl;			// Drag Coeffcient
 	double traj_min;    // min / max trajectories distances
 	double traj_max;
+	double req_height;  // required minium height the debris must reacher
+	double end_height;  // end height relative to initial height of 0
 
 	double loftSpeed = 0.0;
 	Vec3 loftPos;
@@ -37,6 +39,8 @@ public:
 		cl = 0;
 		traj_min = 0;
 		traj_max = 0;
+		req_height = 0;
+		end_height = 0;
 	}
 
 	DebrisFlightParams(double* params) {
@@ -51,6 +55,8 @@ public:
 		cl = params[8];
 		traj_min = params[9];
 		traj_max = params[10];
+		req_height = params[11];
+		end_height = params[12];
 	}
 };
 
